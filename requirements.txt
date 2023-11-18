@@ -1,2 +1,3 @@
 briefcase==0.3.16
 toga==0.4.0
+httpx==0.25.1

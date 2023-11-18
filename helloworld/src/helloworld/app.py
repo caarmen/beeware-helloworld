@@ -4,6 +4,8 @@ My first application
 import toga
 from toga.style import Pack
 from toga.style.pack import COLUMN, ROW
+import httpx
+import json
 
 
 class HelloWorld(toga.App):
@@ -31,8 +33,11 @@ class HelloWorld(toga.App):
         self.main_window.show()
 
     async def fetch_content(self, widget):
-        text = "Content to fetch from a url"
-        self.label.text = text
+        async with httpx.AsyncClient() as client:
+            response = await client.get("https://jsonplaceholder.typicode.com/posts/42")
+        payload = response.json()
+
+        self.label.text = json.dumps(payload, indent=4)
 
 
 def main():
