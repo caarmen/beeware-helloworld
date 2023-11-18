@@ -4,8 +4,8 @@ My first application
 import toga
 from toga.style import Pack
 from toga.style.pack import COLUMN, ROW
-import httpx
-import json
+from graphql_client.client import Client
+from graphql_client.film_query import FilmQuery
 
 
 class HelloWorld(toga.App):
@@ -33,11 +33,11 @@ class HelloWorld(toga.App):
         self.main_window.show()
 
     async def fetch_content(self, widget):
-        async with httpx.AsyncClient() as client:
-            response = await client.get("https://jsonplaceholder.typicode.com/posts/42")
-        payload = response.json()
+        async with Client(url="https://swapi-graphql.netlify.app/.netlify/functions/index") as client:
+            model: FilmQuery = await client.film_query(id="ZmlsbXM6MQ==")
 
-        self.label.text = json.dumps(payload, indent=4)
+
+        self.label.text = f"{model.film.title} was released in {model.film.release_date}"
 
 
 def main():

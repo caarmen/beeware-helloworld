@@ -1,0 +1,4 @@
+[tool.ariadne-codegen]
+remote_schema_url = "https://swapi-graphql.netlify.app/.netlify/functions/index"
+queries_path = "graphql/queries.graphql"
+target_package_path = "helloworld/src/"
