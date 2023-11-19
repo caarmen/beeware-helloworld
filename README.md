@@ -30,7 +30,9 @@ The `briefcase build android` command doesn't seem to package the [pydantic_core
   - `adb install -r build/helloworld/android/gradle/app/build/outputs/apk/debug/app-debug.apk`
   - Start to capture android logs: `adb lolcat -v threadtime > /tmp/logcat.txt 2>&1 &`
   - Launch the app.
-  - Expected behavior: the app ui appears.
+  - Expected behavior: the app ui appears:
+
+    <img src="doc/android.png" width="320">
   - Actual behavior: the app crashes. The following appears in `/tmp/logcat.txt`:
     ```
     11-18 22:46:32.665  5171  5171 D AndroidRuntime: Shutting down VM
